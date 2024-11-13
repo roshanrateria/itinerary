@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>{{ itinerary.name }}</h2>
+<p>Start Date: {{ itinerary.start_date }}</p>
+<p>End Date: {{ itinerary.end_date }}</p>
+
+<h3>Accommodations</h3>
+<ul>
+    {% for accommodation in itinerary.accommodations %}
+        <li>{{ accommodation.name }} - {{ accommodation.location }}
+            <a href="{{ url_for('delete_accommodation', id=accommodation.id) }}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <h4>Add Accommodation</h4>
+    <label for="accommodation_name">Name:</label>
+    <input type="text" id="accommodation_name" name="accommodation_name" required><br>
+    <label for="accommodation_location">Location:</label>
+    <input type="text" id="accommodation_location" name="accommodation_location" required><br>
+    <button type="submit" name="add_accommodation">Add Accommodation</button>
+</form>
+
+<h3>Activities</h3>
+<ul>
+    {% for activity in itinerary.activities %}
+        <li>{{ activity.name }} ({{ activity.date }}) - {{ activity.description }}
+            <a href="{{ url_for('delete_activity', id=activity.id) }}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <h4>Add Activity</h4>
+    <label for="activity_name">Name:</label>
+    <input type="text" id="activity_name" name="activity_name" required><br>
+    <label for="activity_date">Date:</label>
+    <input type="date" id="activity_date" name="activity_date" required><br>
+    <label for="activity_description">Description:</label>
+    <input type="text" id="activity_description" name="activity_description"><br>
+    <button type="submit" name="add_activity">Add Activity</button>
+</form>
+
+<a href="{{ url_for('edit_itinerary', id=itinerary.id) }}">Edit Itinerary</a>
+{% endblock %}

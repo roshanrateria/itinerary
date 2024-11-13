@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>My Itineraries</h2>
+<ul>
+    {% for itinerary in itineraries %}
+        <li>
+            <a href="{{ url_for('view_itinerary', id=itinerary.id) }}">{{ itinerary.name }}</a> 
+            ({{ itinerary.start_date }} to {{ itinerary.end_date }})
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
